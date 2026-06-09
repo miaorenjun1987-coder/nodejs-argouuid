@@ -1,1 +1,379 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <!-- 响应式适配 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>绿色家园 · 共护生态</title>
+    <!-- 引入图标库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 全局样式重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Microsoft YaHei', sans-serif;
+            scroll-behavior: smooth;
+        }
 
+        /* 主题配色 - 环保绿色系 */
+        :root {
+            --primary: #2E7D32;
+            --secondary: #81C784;
+            --light: #E8F5E9;
+            --dark: #1B5E20;
+            --white: #ffffff;
+        }
+
+        body {
+            background-color: var(--light);
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* 导航栏样式 */
+        .navbar {
+            background-color: var(--primary);
+            padding: 1rem 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            color: var(--white);
+            font-size: 1.5rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 1rem;
+            transition: 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: var(--secondary);
+        }
+
+        /* 移动端菜单按钮 */
+        .menu-btn {
+            display: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* 英雄区样式 */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1530587191325-3db32d826c18?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            padding: 0 5%;
+            margin-top: 60px;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--primary);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 50px;
+            transition: 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            background-color: var(--dark);
+            transform: translateY(-3px);
+        }
+
+        /* 通用区块样式 */
+        .section {
+            padding: 5rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            color: var(--dark);
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            width: 80px;
+            height: 4px;
+            background-color: var(--secondary);
+            display: block;
+            margin: 10px auto;
+            border-radius: 2px;
+        }
+
+        /* 环保理念区块 */
+        .ideas {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .idea-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: 0.3s;
+        }
+
+        .idea-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .idea-card i {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .idea-card h3 {
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+
+        /* 环保行动区块 */
+        .actions {
+            background-color: var(--white);
+            border-radius: 15px;
+            padding: 3rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+
+        .action-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            justify-content: center;
+        }
+
+        .action-item {
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+        }
+
+        .action-item i {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        /* 数据统计区块 */
+        .stats {
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 4rem 5%;
+        }
+
+        .stat-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .stat-item h3 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        /* 页脚样式 */
+        footer {
+            background-color: var(--dark);
+            color: var(--white);
+            text-align: center;
+            padding: 2rem 5%;
+        }
+
+        /* 响应式适配 */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+            .menu-btn {
+                display: block;
+            }
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-leaf"></i> 绿色家园
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home">首页</a></li>
+                <li><a href="#ideas">环保理念</a></li>
+                <li><a href="#actions">环保行动</a></li>
+                <li><a href="#stats">环保数据</a></li>
+                <li><a href="#contact">联系我们</a></li>
+            </ul>
+            <div class="menu-btn" id="menuBtn">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 首页英雄区 -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>守护绿水青山 共建美好家园</h1>
+            <p>环境保护是我们每个人的责任，从点滴做起，让绿色成为生活的底色，让生态永续发展。</p>
+            <a href="#actions" class="btn">立即行动</a>
+        </div>
+    </section>
+
+    <!-- 环保理念 -->
+    <section class="section" id="ideas">
+        <h2 class="section-title">核心环保理念</h2>
+        <div class="ideas">
+            <div class="idea-card">
+                <i class="fas fa-recycle"></i>
+                <h3>资源循环</h3>
+                <p>推行垃圾分类与回收利用，减少资源浪费，实现物尽其用。</p>
+            </div>
+            <div class="idea-card">
+                <i class="fas fa-tree"></i>
+                <h3>生态保护</h3>
+                <p>保护森林、湿地与野生动物，维护生物多样性，平衡自然生态。</p>
+            </div>
+            <div class="idea-card">
+                <i class="fas fa-sun"></i>
+                <h3>清洁能源</h3>
+                <p>大力发展太阳能、风能等清洁能源，减少碳排放，守护蓝天。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 环保行动 -->
+    <section class="section" id="actions">
+        <h2 class="section-title">我们能做什么</h2>
+        <div class="actions">
+            <div class="action-list">
+                <div class="action-item">
+                    <i class="fas fa-trash-alt"></i>
+                    <p>做好垃圾分类</p>
+                </div>
+                <div class="action-item">
+                    <i class="fas fa-tint"></i>
+                    <p>节约用水用电</p>
+                </div>
+                <div class="action-item">
+                    <i class="fas fa-car"></i>
+                    <p>绿色低碳出行</p>
+                </div>
+                <div class="action-item">
+                    <i class="fas fa-seedling"></i>
+                    <p>参与植树造林</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 环保数据 -->
+    <section class="stats" id="stats">
+        <div class="stat-container">
+            <div class="stat-item">
+                <h3>1000+</h3>
+                <p>植树数量</p>
+            </div>
+            <div class="stat-item">
+                <h3>50万</h3>
+                <p>节约电量(kWh)</p>
+            </div>
+            <div class="stat-item">
+                <h3>80%</h3>
+                <p>垃圾分类覆盖率</p>
+            </div>
+            <div class="stat-item">
+                <h3>10万+</h3>
+                <p>环保参与者</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer id="contact">
+        <p><i class="fas fa-leaf"></i> 绿色环保 · 人人有责</p>
+        <p>© 2025 守护生态环境 共创美好未来</p>
+    </footer>
+
+    <script>
+        // 移动端菜单交互
+        const menuBtn = document.getElementById('menuBtn');
+        const navMenu = document.querySelector('.nav-menu');
+        
+        menuBtn.addEventListener('click', () => {
+            navMenu.style.display = navMenu.style.display === 'flex' ? 'none' : 'flex';
+            navMenu.style.flexDirection = 'column';
+            navMenu.style.position = 'absolute';
+            navMenu.style.top = '60px';
+            navMenu.style.left = '0';
+            navMenu.style.width = '100%';
+            navMenu.style.backgroundColor = var(--primary);
+            navMenu.style.padding = '1rem';
+        });
+    </script>
+</body>
+</html>
